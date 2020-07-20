@@ -8,6 +8,8 @@
 <title>All Students</title>
 </head>
 <body>
+		<p style="color:blue"> ${sucessMessage} </p>
+		
 		<table>
 				<tr>
 					<th>Student Id</th>
@@ -30,5 +32,7 @@
 
 		</table>
 
+		<br>
+		<a type="button" href="/filesave"> Save Data </a> 
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.controllers;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.entity.Student;
+import com.service.FileWriterService;
 import com.service.StudentService;
 
 
@@ -18,6 +20,9 @@ public class StudentController {
 
 	@Autowired
 	private StudentService studentService;
+	
+	@Autowired 
+	FileWriterService fileWriterService;
 	
 	@GetMapping("/register")
 	public String showLogin(ModelMap model) {
@@ -37,29 +42,24 @@ public class StudentController {
 		return "welcome";
 	}
 	
+	
+	// Find All:
 	@GetMapping("/findall")
 	public String showStudents(ModelMap model) {
 		
-		List<Student> stuList = studentService.findAll();
-		
-		System.out.println("STUDENTS");
-		for (Student stu : stuList) {
-			System.out.println(stu.toString());
-		}
-		
+		List<Student> stuList = studentService.findAll();		
 		
 		model.addAttribute("students", stuList);
 		model.put("students", studentService.findAll());
 		return "findall";
 	}
 	
-	
+	// Find By Student ID:
 	@GetMapping("/findbyid")
 	public String findById() {
 		
 		return "findbyid";
 	}
-	
 	
 	@PostMapping("/findbyid")
 	public String findUserById(ModelMap model, @RequestParam int id) {
@@ -69,6 +69,7 @@ public class StudentController {
 		
 	}
 	
+	// Find Student by name:
 	@GetMapping("/findbyname")
 	public String findByName() {
 		return "findbyname";
@@ -81,6 +82,7 @@ public class StudentController {
 		return "welcome";
 	}
 	
+	// Update:
 	@GetMapping("/update")
 	public String update(@RequestParam int id, ModelMap model) {
 		
@@ -101,12 +103,48 @@ public class StudentController {
 		return "welcome";
 	}
 	
+	//Delete:
 	@GetMapping("/delete")
 	public String deleteUser(@RequestParam int id) {
 		
 		studentService.deleteStudentById(id);
 		
 		return "findall";
+	}
+	
+	// Saving table to a .txt file
+	@GetMapping("/filesave")
+	public String sentToFileSave(ModelMap model) {
+		
+		return "savefile";
+	}
+	
+	@PostMapping("/filesave")
+	public String saveFile(@RequestParam String filename, ModelMap model) {
+
+		String[] file = filename.split("\\.");
+
+		if (file.length == 2 && file[1].equals("txt")) {
+			
+			try {
+				
+				fileWriterService.writeFile(filename);
+				model.put("sucessMessage", "File: " + filename  + " saved sucessfully");
+				return "findall";
+				
+			} catch (IOException e) {
+				model.put("errorMessage", "There was an error saving the file");
+				return "saveFile";
+			}
+			
+		}
+		
+		else {
+			model.put("errorMessage", "Invalid file name");
+			return "savefile";
+		}
+		
+	
 	}
 	
 }
