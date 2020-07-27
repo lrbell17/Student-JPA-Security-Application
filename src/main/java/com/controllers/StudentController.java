@@ -25,7 +25,7 @@ public class StudentController {
 	FileWriterService fileWriterService;
 	
 	@GetMapping("/register")
-	public String showLogin(ModelMap model) {
+	public String showRegister(ModelMap model) {
 		
 		Student stu = new Student();
 		model.addAttribute("student", stu);
@@ -92,11 +92,11 @@ public class StudentController {
 	}
 	
 	@PostMapping("/update")
-	public String updateUser(@RequestParam int id, @RequestParam String stuName, @RequestParam String stuAddress, 
-			ModelMap model) {
+	public String updateUser(@RequestParam int id, @RequestParam String fname, @RequestParam String lname,
+			@RequestParam String pass, @RequestParam double gpa, ModelMap model) {
 		
-		Student student = new Student(id, stuName, stuAddress);
-
+		Student student = new Student(id, fname, lname, pass, gpa);
+		
 		model.put("student", student);
 		studentService.updateStudent(student);
 		

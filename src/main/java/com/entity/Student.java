@@ -14,51 +14,86 @@ public class Student {
 	@Id // treated as primary key
 	private int stuId;
 	
-	@Column(name="STU_NAME") // optional annotation --> changes column name in DB
-	private String stuName;
+	@Column
+	private String password;
 	
-	private String stuAddress;
+	@Column
+	private String firstName;
+	
+	@Column 
+	private String lastName;
+	
+	@Column
+	private double gpa;
 	
 	
 	public Student() {
 		
 	}
-	
-	public Student(int stuId, String stuName, String stuAddress) {
+
+
+	public Student(int stuId, String password, String firstName, String lastName, double gpa) {
 		super();
 		this.stuId = stuId;
-		this.stuName = stuName;
-		this.stuAddress = stuAddress;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.gpa = gpa;
 	}
+
 
 	public int getStuId() {
 		return stuId;
 	}
 
+
 	public void setStuId(int stuId) {
 		this.stuId = stuId;
 	}
 
-	public String getStuName() {
-		return stuName;
+
+	public String getPassword() {
+		return password;
 	}
 
-	public void setStuName(String stuName) {
-		this.stuName = stuName;
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public String getStuAddress() {
-		return stuAddress;
+
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setStuAddress(String stuAddress) {
-		this.stuAddress = stuAddress;
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	@Override
-	public String toString() {
-		return "Student [stuId=" + stuId + ", stuName=" + stuName + ", stuAddress=" + stuAddress + "]";
+
+	public String getLastName() {
+		return lastName;
 	}
+
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+
+	public double getGpa() {
+		return gpa;
+	}
+
+
+	public void setGpa(double gpa) {
+		this.gpa = gpa;
+	}
+	
+	
+	
+	
 	
 	
 }

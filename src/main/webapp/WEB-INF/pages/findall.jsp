@@ -4,31 +4,51 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>All Students</title>
+	<meta charset="ISO-8859-1">
+	<title>All Students</title>
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
+		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	
+	<style>
+	
+		body {
+			margin: 50px 50px;
+		}
+		
+	</style>
 </head>
 <body>
 		<p style="color:blue"> ${sucessMessage} </p>
 		
-		<table>
+		<table class="table">
+			<thead>
 				<tr>
 					<th>Student Id</th>
-					<th>Name</th>
-					<th>Address</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Password</th>
+					<th>GPA</th>
+					<th></th>
 					<th></th>
 				</tr>
+			</thead>
+			<tbody>
 
 				<c:forEach items="${students}" var="student">
 					<tr>
 						<td>${student.stuId}</td>
-						<td>${student.stuName}</td>
-						<td>${student.stuAddress}</td>
+						<td>${student.firstName}</td>
+						<td>${student.lastName}</td>
+						<td>${student.password}</td>
+						<td>${student.gpa}</td>
 						<td><a type="button" 
 							href="/update?id=${student.stuId}">Update</a></td>
 						<td><a type="button"
 							href="/delete?id=${student.stuId}">Delete</a></td>
 					</tr>
 				</c:forEach>
+			</tbody>
 
 		</table>
 

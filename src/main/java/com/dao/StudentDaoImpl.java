@@ -49,7 +49,7 @@ public class StudentDaoImpl implements StudentDao{
 	@Override
 	public Student findStudentByName(String name) {
 	
-		return studentRepo.findByStuName(name);
+		return studentRepo.findByFirstName(name);
 	}
 
 
