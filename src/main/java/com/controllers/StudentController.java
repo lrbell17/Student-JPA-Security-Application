@@ -32,8 +32,32 @@ public class StudentController {
 		return "register";
 	}
 	
+	@GetMapping("/login")
+	public String showLogin() {
+		return "login";
+	}
+	
+	@GetMapping("/welcome")
+	public String getWelcome(ModelMap model) {
+		
+		Student stu = new Student(0, "", "", "", "", 0.0);
+
+		model.put("student", stu);
+		
+		return "welcome";
+	}
+	
 	@PostMapping("/welcome")
 	public String showWelcome(Student stu, ModelMap model) {
+		
+		// Check for duplicate ID's
+		List<Student> stuList = studentService.findAll();
+		for (Student student : stuList) {
+			if (student.getStuId() == stu.getStuId()) {
+				model.put("errorMessage", "This student ID already exists");
+				return("register");
+			}
+		}
 		
 		model.put("student", stu);
 		
@@ -47,9 +71,6 @@ public class StudentController {
 	@GetMapping("/findall")
 	public String showStudents(ModelMap model) {
 		
-		List<Student> stuList = studentService.findAll();		
-		
-		model.addAttribute("students", stuList);
 		model.put("students", studentService.findAll());
 		return "findall";
 	}
@@ -92,23 +113,37 @@ public class StudentController {
 	}
 	
 	@PostMapping("/update")
-	public String updateUser(@RequestParam int id, @RequestParam String fname, @RequestParam String lname,
-			@RequestParam String pass, @RequestParam double gpa, ModelMap model) {
+	public String updateUser(@RequestParam int id, @RequestParam String firstName, @RequestParam String lastName,
+			@RequestParam String username, @RequestParam String password, @RequestParam double gpa, ModelMap model) {
 		
-		Student student = new Student(id, fname, lname, pass, gpa);
+		Student student = new Student(id, username, password, firstName, lastName, gpa);
 		
 		model.put("student", student);
-		studentService.updateStudent(student);
-		
-		return "welcome";
+		try {
+			studentService.updateStudent(student);
+			model.put("successMessage", "Student updated successfully!");
+		} catch (Exception e) {
+			model.put("errorMessage", "Unable to update user!");
+			e.printStackTrace();
+		}
+
+		model.put("students", studentService.findAll());
+		return "findall";
 	}
 	
 	//Delete:
 	@GetMapping("/delete")
-	public String deleteUser(@RequestParam int id) {
+	public String deleteUser(@RequestParam int id, ModelMap model) {
 		
-		studentService.deleteStudentById(id);
-		
+		try {
+			studentService.deleteStudentById(id);
+			model.put("successMessage", "Student deleted successfully!");
+		} catch (Exception e) {
+			model.put("errorMessage", "Unable to delete user!");
+			e.printStackTrace();
+		}
+	
+		model.put("students", studentService.findAll());
 		return "findall";
 	}
 	
@@ -129,7 +164,7 @@ public class StudentController {
 			try {
 				
 				fileWriterService.writeFile(filename);
-				model.put("sucessMessage", "File: " + filename  + " saved sucessfully");
+				model.put("successMessage", "File: " + filename  + " saved sucessfully");
 				return "findall";
 				
 			} catch (IOException e) {

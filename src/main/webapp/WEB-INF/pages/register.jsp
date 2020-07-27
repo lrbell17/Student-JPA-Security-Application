@@ -19,15 +19,18 @@
 </head>
 <body>
 
-	<h2>Register Here</h2>
+	<%@ include file="menu.jsp" %>
 
+	<h2>Add student information here</h2>
+
+	<p style="color:red"> ${errorMessage} </p>
 	<form:form method="post" modelAttribute="student" action="welcome" class="form-group">
-		
-		Student Id: <form:input type="text" path="stuId"/><br><br>
 		
 		First Name: <form:input type="text" path="firstName"/><br><br>
 		
 		Last Name: <form:input type="text" path="lastName" /> <br><br>
+		
+		Username: <form:input type="text" path="username"/><br><br>
 		
 		Password: <form:input type="password" path="password"/> <br><br>
 		

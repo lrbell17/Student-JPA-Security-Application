@@ -19,7 +19,11 @@
 	</style>
 </head>
 <body>
-		<p style="color:blue"> ${sucessMessage} </p>
+
+		<%@ include file="menu.jsp" %>
+		
+		<p style="color:blue"> ${successMessage} </p>
+		<p style="color:red"> ${errorMessage} </p>
 		
 		<table class="table">
 			<thead>
@@ -27,6 +31,7 @@
 					<th>Student Id</th>
 					<th>First Name</th>
 					<th>Last Name</th>
+					<th>Username</th>
 					<th>Password</th>
 					<th>GPA</th>
 					<th></th>
@@ -40,6 +45,7 @@
 						<td>${student.stuId}</td>
 						<td>${student.firstName}</td>
 						<td>${student.lastName}</td>
+						<td>${student.username}</td>
 						<td>${student.password}</td>
 						<td>${student.gpa}</td>
 						<td><a type="button" 
@@ -53,6 +59,8 @@
 		</table>
 
 		<br>
-		<a type="button" href="/filesave"> Save Data </a> 
+		<a type="button" href="/filesave"> Save Data </a> <br>
+		
+		<a type="button" href="/welcome"> Home </a>
 </body>
 </html>

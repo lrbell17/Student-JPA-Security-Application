@@ -55,12 +55,15 @@ public class StudentDaoImpl implements StudentDao{
 
 	@Override
 	public Student updateStudent(Student student) {
-		
-	//	Student student1 = findByIdOptional(student.getStuId());
-	//	studentRepo.deleteById(student.getStuId());
+		Student stuFromDB = studentRepo.findByStuId(student.getStuId());
+		stuFromDB.setFirstName(student.getFirstName());
+		stuFromDB.setLastName(student.getLastName());
+		stuFromDB.setUsername(student.getUsername());
+		stuFromDB.setPassword(student.getPassword());
+		stuFromDB.setGpa(student.getGpa());
 		studentRepo.save(student);
 		
-		return student;
+		return stuFromDB;
 	}
 	
 

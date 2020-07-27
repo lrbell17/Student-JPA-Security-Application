@@ -17,6 +17,7 @@
 	</style>
 </head>
 <body>
+		<%@ include file="menu.jsp" %>
 
 		Please enter a valid file name (.txt):
 		<br>

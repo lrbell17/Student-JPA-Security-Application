@@ -16,6 +16,8 @@
 	</style>
 </head>
 <body>
+		<%@ include file="menu.jsp" %>
+		
 		<form method="post"  action="findbyname">
 		
 		Student's First Name: <input type="text" name="name"/><br>

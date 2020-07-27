@@ -18,6 +18,8 @@
 </head>
 <body>
 
+	<%@ include file="menu.jsp" %>
+	
 	<form method="post"  action="findbyid">
 		
 		Student Id: <input type="text" name="id"/><br>

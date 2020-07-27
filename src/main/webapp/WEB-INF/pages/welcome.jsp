@@ -18,11 +18,14 @@
 	</style>
 </head>
 <body>
+	<%@ include file="menu.jsp" %>
+	
 	<h2>Welcome!</h2>
-	Student Id: <c:out value="${student.stuId}"/> <br>
-	Name: <c:out value="${student.firstName}"/> <c:out value="${student.lastName}"/><br>
-	Password: <c:out value="${student.password}"/><br>
-	GPA: <c:out value="${student.gpa}"/><br>
+	Student Id: <p>${student.stuId} </p> <br>
+	Name: <p> ${student.firstName} ${student.lastName} </p><br>
+	Username: <p> ${student.username} </p><br>
+	Password: <p> ${student.password} </p>
+	GPA: <p> ${student.gpa}</p>
 
 
 	<br>

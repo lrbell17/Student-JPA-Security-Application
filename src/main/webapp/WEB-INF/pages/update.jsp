@@ -16,19 +16,24 @@
 	</style>
 </head>
 <body>
-	Update user
+
+		<%@ include file="menu.jsp" %>
+	
+		<h2>Update user</h2>
 		
 		<form method="post"  action="update" class="form-group">
 		
-		Student Id: <input type="hidden" name="id" value ="${id}"/><br><br>
+		Student Id: <span>${id} </span><input type="hidden" name="id" value ="${id}"/><br><br>
 		
-		First Name: <input type="text" name="fname"/><br><br>
+		First Name: <input type="text" name="firstName"/><br><br>
 		
-		Last Name: <input type="text" name="lname" /> <br><br>
+		Last Name: <input type="text" name="lastName" /> <br><br>
 		
-		Password: <input type="password" name="pass" /><br><br>
+		Username: <input type="text" name="username" /> <br><br>
 		
-		GPA <input name="gpa" type="number" placeholder="1.00" step="0.01" min="0" max="10" /><br>
+		Password: <input type="password" name="password" /><br><br>
+		
+		GPA: <input name="gpa" type="number" placeholder="1.00" step="0.01" min="0" max="10" /><br>
 		
 		<input type="submit" />
 	
