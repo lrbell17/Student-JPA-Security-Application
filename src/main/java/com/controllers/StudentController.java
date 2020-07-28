@@ -32,10 +32,23 @@ public class StudentController {
 		return "register";
 	}
 	
-	@GetMapping("/login")
-	public String showLogin() {
-		return "login";
+	
+	@GetMapping("/")
+	public String showDefault(ModelMap model) {
+		model.put("students", studentService.findAll());
+		return "findall";
 	}
+	
+	@GetMapping("/login")
+    public String login(ModelMap model, String error, String logout) {
+        if (error != null)
+            model.put("errorMsg", "Your username and password are invalid.");
+
+        if (logout != null)
+            model.put("msg", "You have been logged out successfully.");
+
+        return "login";
+    }
 	
 	@GetMapping("/welcome")
 	public String getWelcome(ModelMap model) {
@@ -159,6 +172,7 @@ public class StudentController {
 
 		String[] file = filename.split("\\.");
 
+		// Check for correct format
 		if (file.length == 2 && file[1].equals("txt")) {
 			
 			try {

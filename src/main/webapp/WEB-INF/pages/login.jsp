@@ -1,10 +1,16 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<html>
+<c:set var="contextPath" value=""/>
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
-		<title>Student Login</title>
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
+ 	<meta charset="ISO-8859-1">
+	<title>Login</title>
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
 		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	
 	<style>
@@ -13,19 +19,29 @@
 			margin: 50px 50px;
 		}
 	</style>
-	
-</head>		
+</head>
 
-	<body>
+<body>
+
+
+	<h2 > Log in </h2>
 	
-		<h2>Student Login</h2>
-						
-		<c:url value="/login" var="login"/>
+	<p style="color:blue"> ${msg} </p>
+	
+	<p style="color:red"> ${errorMsg} </p>
+	
+    <form method="POST" action="/login" class="form-group">
 		
-		<form:form action="" method="post" class="form-group">
-			<label>Username:</label> <input type="text" name="username" /> <br><br>
-			<label>Password:</label> <input type="text" name="password" />
-			<input type="submit"/>
-		</form:form>
-	</body>
+        <div class="form-group ">
+            	
+            	Username: <input type="text" name="username" placeholder="Username" /><br><br>
+		
+				Password: <input type="password" name="password" placeholder="Password" /> <br><br>
+				
+       			<input type="submit" />
+        </div>
+
+    </form>
+
+</body>
 </html>

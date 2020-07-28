@@ -29,11 +29,10 @@
 
 
 	<br>
-	<a type="button" href="/findall">List of all students</a> | 
+	
 	<a type="button" href="/findbyname">Find student by name</a> | 
 	<a type="button" href="/findbyid">Find student by ID</a><br>
 
-	<a type="button" href="/register">Add student</a>
 
 </body>
 </html>

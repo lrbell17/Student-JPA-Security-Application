@@ -60,7 +60,6 @@
 
 		<br>
 		<a type="button" href="/filesave"> Save Data </a> <br>
-		
-		<a type="button" href="/welcome"> Home </a>
+
 </body>
 </html>
