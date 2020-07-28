@@ -26,13 +26,13 @@
 	<p style="color:red"> ${errorMessage} </p>
 	<form:form method="post" modelAttribute="student" action="welcome" class="form-group">
 		
-		First Name: <form:input type="text" path="firstName"/><br><br>
+		First Name: <form:input type="text" path="firstName" placeholder="First Name" required="required"/><br><br>
 		
-		Last Name: <form:input type="text" path="lastName" /> <br><br>
+		Last Name: <form:input type="text" path="lastName" placeholder="Last Name" required="required"/> <br><br>
 		
-		Username: <form:input type="text" path="username"/><br><br>
+		Username: <form:input type="text" path="username" placeholder="Username" required="required"/><br><br>
 		
-		Password: <form:input type="password" path="password"/> <br><br>
+		Password: <form:input type="password" path="password" placeholder="Password" required="required"/> <br><br>
 		
 		GPA: <form:input path="gpa" type="number" placeholder="0.00" step="0.01" min="0" max="4" /><br><br>
 		

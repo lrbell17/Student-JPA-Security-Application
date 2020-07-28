@@ -14,7 +14,7 @@ public interface StudentRepo extends CrudRepository<Student, Integer>{
 
 	public Student findByStuId(int id); // Magic!! just math w/ attribute in bean class
 	
-	public Student findByFirstName(String name);
+	public Student findByUsername(String uname);
 	
 	public void deleteByStuId(int id);
 }

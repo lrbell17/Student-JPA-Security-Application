@@ -20,9 +20,13 @@
 
 	<%@ include file="menu.jsp" %>
 	
+	<h2> Find Student by Id</h2>
+	
+	<p style="color:red"> ${errorMsg} </p>
+	
 	<form method="post"  action="findbyid">
 		
-		Student Id: <input type="text" name="id"/><br>
+		Student Id: <input type="text" name="id" placeholder="Student Id" required/><br><br>
 	
 		<input type="submit" />
 	

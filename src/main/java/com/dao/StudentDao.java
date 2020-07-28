@@ -12,7 +12,7 @@ public interface StudentDao {
 	
 	public Student findStudent(int id);
 	
-	public Student findStudentByName(String name);
+	public Student findStudentByUsername(String name);
 	
 	public Student updateStudent(Student student);
 	

@@ -25,15 +25,15 @@
 		
 		Student Id: <span>${id} </span><input type="hidden" name="id" value ="${id}"/><br><br>
 		
-		First Name: <input type="text" name="firstName"/><br><br>
+		First Name: <input type="text" name="firstName" placeholder="${oldStudent.firstName}" required/><br><br>
 		
-		Last Name: <input type="text" name="lastName" /> <br><br>
+		Last Name: <input type="text" name="lastName" placeholder="${oldStudent.lastName}" required/> <br><br>
 		
-		Username: <input type="text" name="username" /> <br><br>
+		Username: <input type="text" name="username" placeholder="${oldStudent.username}" required/> <br><br>
 		
-		Password: <input type="password" name="password" /><br><br>
+		Password: <input type="password" name="password"  placeholder="Password" required/><br><br>
 		
-		GPA: <input name="gpa" type="number" placeholder="1.00" step="0.01" min="0" max="10" /><br>
+		GPA: <input name="gpa" type="number" placeholder="${oldStudent.gpa}" step="0.01" min="0" max="10" required/><br><br>
 		
 		<input type="submit" />
 	

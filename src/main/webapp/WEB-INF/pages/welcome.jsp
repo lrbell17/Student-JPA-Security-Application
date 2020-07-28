@@ -20,18 +20,26 @@
 <body>
 	<%@ include file="menu.jsp" %>
 	
-	<h2>Welcome!</h2>
+	<h2>Student:</h2>
+
+	<!-- only displays password to admin -->
+	<c:choose>
+		<c:when test="${role=='ADMIN'}">
+			<c:set var="pass" value="${student.password}" />
+		</c:when>
+		<c:otherwise>
+			<c:set var="pass" value="(hidden)" />
+		</c:otherwise>
+	</c:choose>
+
 	Student Id: <p>${student.stuId} </p> <br>
 	Name: <p> ${student.firstName} ${student.lastName} </p><br>
 	Username: <p> ${student.username} </p><br>
-	Password: <p> ${student.password} </p>
+	Password: <p> ${pass} </p>
 	GPA: <p> ${student.gpa}</p>
 
 
 	<br>
-	
-	<a type="button" href="/findbyname">Find student by name</a> | 
-	<a type="button" href="/findbyid">Find student by ID</a><br>
 
 
 </body>

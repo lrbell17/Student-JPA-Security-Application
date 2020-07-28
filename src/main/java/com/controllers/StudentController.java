@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.entity.Student;
 import com.service.FileWriterService;
+import com.service.RegistrationService;
 import com.service.StudentService;
 
 
@@ -24,6 +25,9 @@ public class StudentController {
 	@Autowired 
 	FileWriterService fileWriterService;
 	
+	@Autowired
+	RegistrationService registrationService;
+	
 	@GetMapping("/register")
 	public String showRegister(ModelMap model) {
 		
@@ -35,6 +39,7 @@ public class StudentController {
 	
 	@GetMapping("/")
 	public String showDefault(ModelMap model) {
+		model.put("role", registrationService.getRole());
 		model.put("students", studentService.findAll());
 		return "findall";
 	}
@@ -72,8 +77,12 @@ public class StudentController {
 			}
 		}
 		
+		// add to Registration DB
+		registrationService.addUser(stu);
+		
 		model.put("student", stu);
 		
+		// add to student DB
 		studentService.addStudent(stu);
 		
 		return "welcome";
@@ -84,6 +93,7 @@ public class StudentController {
 	@GetMapping("/findall")
 	public String showStudents(ModelMap model) {
 		
+		model.put("role", registrationService.getRole());
 		model.put("students", studentService.findAll());
 		return "findall";
 	}
@@ -98,20 +108,36 @@ public class StudentController {
 	@PostMapping("/findbyid")
 	public String findUserById(ModelMap model, @RequestParam int id) {
 		Student stu = studentService.findStudent(id);
+		
+		// handling invalid id
+		if (stu == null) {
+			model.put("errorMsg", "Couldn't find a student with this id");
+			return "findbyid";
+		}
+		
+		model.put("role", registrationService.getRole());
 		model.put("student", stu);
 		return "welcome";
 		
 	}
 	
 	// Find Student by name:
-	@GetMapping("/findbyname")
+	@GetMapping("/findbyuname")
 	public String findByName() {
 		return "findbyname";
 	}
 	
-	@PostMapping("/findbyname")
-	public String findUserByName(ModelMap model, @RequestParam String name) {
-		Student stu = studentService.findStudentByName(name);
+	@PostMapping("/findbyuname")
+	public String findUserByUsername(ModelMap model, @RequestParam String uname) {
+		Student stu = studentService.findStudentByUsername(uname);
+		
+		// handling invalid username
+		if (stu == null) {
+			model.put("errorMsg", "Couldn't find a student with this id");
+			return "findbyname";
+		}
+		
+		model.put("role", registrationService.getRole());
 		model.put("student", stu);
 		return "welcome";
 	}
@@ -121,6 +147,10 @@ public class StudentController {
 	public String update(@RequestParam int id, ModelMap model) {
 		
 		model.put("id", id);
+		
+		Student oldStudent = studentService.findStudent(id);
+		
+		model.put("oldStudent", oldStudent);
 		
 		return "update";
 	}
@@ -133,13 +163,16 @@ public class StudentController {
 		
 		model.put("student", student);
 		try {
-			studentService.updateStudent(student);
+			registrationService.updateUser(student); // update Registration DB
+			studentService.updateStudent(student); // update Student DB
+		
 			model.put("successMessage", "Student updated successfully!");
 		} catch (Exception e) {
 			model.put("errorMessage", "Unable to update user!");
 			e.printStackTrace();
 		}
 
+		model.put("role", registrationService.getRole());
 		model.put("students", studentService.findAll());
 		return "findall";
 	}
@@ -149,13 +182,16 @@ public class StudentController {
 	public String deleteUser(@RequestParam int id, ModelMap model) {
 		
 		try {
-			studentService.deleteStudentById(id);
+			registrationService.removeUser(id); // remove from Registration DB
+			studentService.deleteStudentById(id); // remove from student DB
+			
 			model.put("successMessage", "Student deleted successfully!");
 		} catch (Exception e) {
 			model.put("errorMessage", "Unable to delete user!");
 			e.printStackTrace();
 		}
 	
+		model.put("role", registrationService.getRole());
 		model.put("students", studentService.findAll());
 		return "findall";
 	}
@@ -178,6 +214,7 @@ public class StudentController {
 			try {
 				
 				fileWriterService.writeFile(filename);
+				model.put("role", registrationService.getRole());
 				model.put("successMessage", "File: " + filename  + " saved sucessfully");
 				return "findall";
 				
@@ -192,8 +229,12 @@ public class StudentController {
 			model.put("errorMessage", "Invalid file name");
 			return "savefile";
 		}
-		
 	
+	}
+	
+	// Error page:
+	public String showError() {
+		return "error";
 	}
 	
 }

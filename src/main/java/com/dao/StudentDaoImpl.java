@@ -47,9 +47,9 @@ public class StudentDaoImpl implements StudentDao{
 
 
 	@Override
-	public Student findStudentByName(String name) {
+	public Student findStudentByUsername(String name) {
 	
-		return studentRepo.findByFirstName(name);
+		return studentRepo.findByUsername(name);
 	}
 
 

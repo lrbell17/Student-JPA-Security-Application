@@ -40,9 +40,9 @@ public class StudentServiceImpl implements StudentService{
 
 
 	@Override
-	public Student findStudentByName(String name) {
+	public Student findStudentByUsername(String uname) {
 		// TODO Auto-generated method stub
-		return studentDao.findStudentByName(name);
+		return studentDao.findStudentByUsername(uname);
 	}
 
 

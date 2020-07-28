@@ -12,7 +12,7 @@ public interface StudentService {
 	
 	public Student findStudent(int id);
 	
-	public Student findStudentByName(String name);
+	public Student findStudentByUsername(String uname);
 	
 	public Student updateStudent(Student student);
 	

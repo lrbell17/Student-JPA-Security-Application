@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta charset="ISO-8859-1">
-	<title>Find Student By Name</title>
+	<title>Error</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	
@@ -16,19 +16,16 @@
 	</style>
 </head>
 <body>
-		<%@ include file="menu.jsp" %>
-		
-		<h2>Find Student by Username</h2>
-		
-		<p style="color:red"> ${errorMsg} </p>
-		
-		<form method="post"  action="findbyuname">
-		
-		Student's First Name: <input type="text" name="uname" placeholder="Username" required/><br><br>
+	<%@ include file="menu.jsp" %>
 	
-		<input type="submit" />
+	<p style="color:red">
+		Sorry, you don't have access to this page! <br>
+	</p>
 	
-	
-	</form>
+	Possible Causes:
+	<ul>
+		<li>You may not have admin privileges</li>
+		<li>The url may be incorrect</li>
+	</ul>
 </body>
 </html>

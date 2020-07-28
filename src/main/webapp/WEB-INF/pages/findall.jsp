@@ -41,12 +41,24 @@
 			<tbody>
 
 				<c:forEach items="${students}" var="student">
+					
+					<!-- only display passwords for admin -->
+					<c:choose>
+						<c:when test="${role=='ADMIN'}">
+							<c:set var="pass" value="${student.password}" />
+						</c:when>
+						<c:otherwise>
+							<c:set var="pass" value="(hidden)" />
+						</c:otherwise>
+					</c:choose>
+					
+					
 					<tr>
 						<td>${student.stuId}</td>
 						<td>${student.firstName}</td>
 						<td>${student.lastName}</td>
 						<td>${student.username}</td>
-						<td>${student.password}</td>
+						<td>${pass}</td>
 						<td>${student.gpa}</td>
 						<td><a type="button" 
 							href="/update?id=${student.stuId}">Update</a></td>
