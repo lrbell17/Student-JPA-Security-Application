@@ -7,7 +7,7 @@ Spring Boot application with Data JPA and MVC design pattern for the implementat
 * IO Streams --> save data to an external .txt file
 * **Spring Boot Security:**
   - Student:
-    - read privileges
+    - read privileges only (can't add, update, or delete a student)
     - username/password --> "student"/"student"
   - Admin
     - read/write privileges
