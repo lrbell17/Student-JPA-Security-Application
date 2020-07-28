@@ -1,4 +1,4 @@
-# Student-JPA-Application
+# Student-JPA-Security-Application
 
 Spring Boot application with Data JPA and MVC design pattern for the implementation of services to create, read, update, and delete student data stored in a MySQL database.  
 
