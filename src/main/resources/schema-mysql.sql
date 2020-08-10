@@ -13,5 +13,5 @@ create table authorities (
     foreign key (username) references users (username)
 );
 
-insert into users(username, password, enabled)values('admin','{noop}admin',true);
+insert into users(username, password, enabled)values('admin','admin',true);
 insert into authorities(username,authority)values('admin','ROLE_ADMIN');

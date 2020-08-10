@@ -25,35 +25,41 @@ public class RegistrationService {
 	@Autowired
 	StudentService studentService;
 	
+	@Autowired
+	EncryptDecryptService encryptDecryptService;
+	
+	
 	// save uname, password, and role into DB
 	public void addUser(Student stu) {
 		
 		String uName = stu.getUsername();
-		String pass = "{noop}" + stu.getPassword();
+		String encryptedPassword = stu.getPassword();
 		
-		UserRegistration userRegistration = new UserRegistration(uName, pass);
+		
+		UserRegistration userRegistration = new UserRegistration(uName, encryptedPassword);
 		
 		// authorities to be granted
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 				authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-				
+
+		
 		User user = new User(userRegistration.getUsername(), userRegistration.getPassword(), authorities);
 		jdbcUserDetailsManager.createUser(user);
 	}
 		
+	
 	public void removeUser(int id) {
-
-		
+	
 		Student student = studentService.findStudent(id);
 		String username = student.getUsername();
-		jdbcUserDetailsManager.deleteUser(username);;
+		jdbcUserDetailsManager.deleteUser(username); // delete from registration DB
 	}
 	
 	// update username and password
 	public void updateUser(Student student) {
 		
 		removeUser(student.getStuId());
-		addUser(student);
+		addUser(student	);
 		
 	}
 	

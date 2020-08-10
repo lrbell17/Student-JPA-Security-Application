@@ -23,7 +23,6 @@
 
 	<h2>Add student information here</h2>
 
-	<p style="color:red"> ${errorMessage} </p>
 	<form:form method="post" modelAttribute="student" action="welcome" class="form-group">
 		
 		First Name: <form:input type="text" path="firstName" placeholder="First Name" required="required"/><br><br>
@@ -34,7 +33,7 @@
 		
 		Password: <form:input type="password" path="password" placeholder="Password" required="required"/> <br><br>
 		
-		GPA: <form:input path="gpa" type="number" placeholder="0.00" step="0.01" min="0" max="4" /><br><br>
+		GPA: <form:input type="number" path="gpa" placeholder="0.00" step="0.01" min="0" max="4" required="required"/><br><br>
 		
 		<input type="submit" />
 	

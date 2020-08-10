@@ -12,6 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 
+import com.service.EncryptDecryptService;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -23,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	// jdbc authentication
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication().dataSource(dataSource);
+        auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(new EncryptDecryptService());
     }
     
 	@Bean
@@ -45,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		 http.authorizeRequests()
-		 	.antMatchers("/").permitAll()
+		 	.antMatchers("/").hasAnyRole("USER", "ADMIN")
 		 	.antMatchers("/welcome").hasAnyRole("USER", "ADMIN")
 		 	.antMatchers("/findall").hasAnyRole("USER", "ADMIN")
 		 	.antMatchers("/findbyid").hasAnyRole("USER", "ADMIN")
@@ -53,10 +55,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		 	.antMatchers("/register").hasAnyRole("ADMIN")
 		 	.antMatchers("/delete").hasAnyRole("ADMIN")
 		 	.antMatchers("/update").hasAnyRole("ADMIN")
-		 	.anyRequest().authenticated().and().formLogin().loginPage("/login")
+		 	.anyRequest().authenticated().and().formLogin().loginPage("/login") // custom login page
 		 	.permitAll().and().logout().permitAll();
 		 
-     http.csrf().disable();
+		 http.csrf().disable();
 
 	}
 

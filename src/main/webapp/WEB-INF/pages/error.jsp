@@ -24,8 +24,9 @@
 	
 	Possible Causes:
 	<ul>
-		<li>You may not have admin privileges</li>
-		<li>The url may be incorrect</li>
+		<li>You don't have admin privileges</li>
+		<li>The url is incorrect</li>
+		<li>An error occurred</li>
 	</ul>
 </body>
 </html>

@@ -1,7 +1,6 @@
 package com.controllers;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.entity.Student;
+import com.service.EncryptDecryptService;
 import com.service.FileWriterService;
 import com.service.RegistrationService;
 import com.service.StudentService;
@@ -19,20 +19,25 @@ import com.service.StudentService;
 @Controller
 public class StudentController {
 
+	// Services ------------------------------
 	@Autowired
 	private StudentService studentService;
 	
 	@Autowired 
-	FileWriterService fileWriterService;
+	private FileWriterService fileWriterService;
 	
 	@Autowired
-	RegistrationService registrationService;
+	private RegistrationService registrationService;
 	
+	@Autowired
+	private EncryptDecryptService encryptDecryptService;
+
+
+	// Mapping ----------------------------------
 	@GetMapping("/register")
 	public String showRegister(ModelMap model) {
-		
-		Student stu = new Student();
-		model.addAttribute("student", stu);
+
+		model.addAttribute("student", new Student());
 		return "register";
 	}
 	
@@ -58,7 +63,7 @@ public class StudentController {
 	@GetMapping("/welcome")
 	public String getWelcome(ModelMap model) {
 		
-		Student stu = new Student(0, "", "", "", "", 0.0);
+		Student stu = new Student(0, "", null, "", "", 0.0);
 
 		model.put("student", stu);
 		
@@ -67,23 +72,17 @@ public class StudentController {
 	
 	@PostMapping("/welcome")
 	public String showWelcome(Student stu, ModelMap model) {
+
+		// Encrypt Password:
+		String encryptedPassword = encryptDecryptService.encryptString(stu.getPassword());
 		
-		// Check for duplicate ID's
-		List<Student> stuList = studentService.findAll();
-		for (Student student : stuList) {
-			if (student.getStuId() == stu.getStuId()) {
-				model.put("errorMessage", "This student ID already exists");
-				return("register");
-			}
-		}
-		
-		// add to Registration DB
+		stu.setPassword(encryptedPassword);
+
+		// add to student to Student and Registration Databases
 		registrationService.addUser(stu);
+		studentService.addStudent(stu);
 		
 		model.put("student", stu);
-		
-		// add to student DB
-		studentService.addStudent(stu);
 		
 		return "welcome";
 	}
@@ -159,7 +158,10 @@ public class StudentController {
 	public String updateUser(@RequestParam int id, @RequestParam String firstName, @RequestParam String lastName,
 			@RequestParam String username, @RequestParam String password, @RequestParam double gpa, ModelMap model) {
 		
-		Student student = new Student(id, username, password, firstName, lastName, gpa);
+		// Encrypt Password
+		String encryptedPassword = encryptDecryptService.encryptString(password);
+		
+		Student student = new Student(id, username, encryptedPassword, firstName, lastName, gpa);
 		
 		model.put("student", student);
 		try {

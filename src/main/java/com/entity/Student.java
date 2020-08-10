@@ -20,7 +20,7 @@ public class Student {
 	private String username;
 	
 	@Column
-	private String password;
+	private String password; // password will be encrypted
 	
 	@Column
 	private String firstName;
@@ -36,6 +36,15 @@ public class Student {
 		
 	}
 
+	public Student(String username, String password, String firstName, String lastName, double gpa) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.gpa = gpa;
+	}
+	
 	public Student(int stuId, String username, String password, String firstName, String lastName, double gpa) {
 		super();
 		this.stuId = stuId;
