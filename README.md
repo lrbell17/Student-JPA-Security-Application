@@ -8,6 +8,7 @@ Spring Boot application with Data JPA and MVC design pattern for the implementat
 * IO Streams --> save data to an external .txt file
 * **Spring Boot Security:**
   - Uses jdbc authentication for the login and registration of students
+  - Password encryption
   - Access to certain features based on roles:
     - Student:
       - read privileges only (can't add, update, or delete a student from DB)
@@ -18,7 +19,8 @@ Spring Boot application with Data JPA and MVC design pattern for the implementat
 **Execution:**
  * run as Java application
  * connect to localhost:8080 in browser
- * login as admin, add some students, try out the other features
+ * login as admin, add some students, try out the other features 
+     - if you look in the MySQL database or on the "findall" page, you will see that the passwords have been encoded!
  * logout and log back in as one of the users you created
-    --> you will find that some features/information is now blocked!
+    - you will find that some features/information is now blocked!
    
