@@ -23,6 +23,8 @@
 
 	<h2>Add student information here</h2>
 
+	<p style="color:red"> ${errorMsg} </p>
+	
 	<form:form method="post" modelAttribute="student" action="welcome" class="form-group">
 		
 		First Name: <form:input type="text" path="firstName" placeholder="First Name" required="required"/><br><br>

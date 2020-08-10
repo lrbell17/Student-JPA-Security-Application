@@ -36,14 +36,6 @@ public class Student {
 		
 	}
 
-	public Student(String username, String password, String firstName, String lastName, double gpa) {
-		super();
-		this.username = username;
-		this.password = password;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.gpa = gpa;
-	}
 	
 	public Student(int stuId, String username, String password, String firstName, String lastName, double gpa) {
 		super();

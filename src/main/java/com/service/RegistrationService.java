@@ -46,8 +46,7 @@ public class RegistrationService {
 		User user = new User(userRegistration.getUsername(), userRegistration.getPassword(), authorities);
 		jdbcUserDetailsManager.createUser(user);
 	}
-		
-	
+
 	public void removeUser(int id) {
 	
 		Student student = studentService.findStudent(id);

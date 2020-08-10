@@ -73,9 +73,19 @@ public class StudentController {
 	@PostMapping("/welcome")
 	public String showWelcome(Student stu, ModelMap model) {
 
+		boolean match = false;
+		for (Student s : studentService.findAll()) {
+			if (s.getUsername().equals(stu.getUsername())) {
+				match = true;
+			}
+		}
+		if (match || stu.getUsername().equals("admin")) {
+			model.put("errorMsg", "This username already exists, try again!");
+			return "register";
+		}
+		
 		// Encrypt Password:
 		String encryptedPassword = encryptDecryptService.encryptString(stu.getPassword());
-		
 		stu.setPassword(encryptedPassword);
 
 		// add to student to Student and Registration Databases
