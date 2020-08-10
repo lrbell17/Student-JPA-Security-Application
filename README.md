@@ -6,7 +6,7 @@ Spring Boot application with Data JPA and MVC design pattern for the implementat
 * UI with JSP and JSTL
 * Read/Write student information in database
 * IO Streams --> save data to an external .txt file
-* **Spring Boot Security:**
+* **Spring Security:**
   - Uses jdbc authentication for the login and registration of students
   - Password encryption
   - Access to certain features based on roles:
